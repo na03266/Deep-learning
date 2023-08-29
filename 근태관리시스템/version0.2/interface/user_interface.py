@@ -1,19 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
-import os
-import sys
-
-# 현재 파일의 디렉토리를 기준으로 상대경로로 설정
-current_dir = os.path.dirname(os.path.abspath(__file__))
-attendance_dir = os.path.join(current_dir, "attendance")
-sys.path.append(attendance_dir)
-
 from attendance.attendance_record import record_attendance
-class UserAttendanceApp:
+from authentication.db_handler import check_user_credentials
+
+class UserAuthenticationApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("출퇴근 기록")
-
+        self.root.title("사용자 인증 및 로그인")
+        
         self.username_label = tk.Label(root, text="사용자명:")
         self.username_label.pack()
 
@@ -25,6 +19,31 @@ class UserAttendanceApp:
 
         self.password_entry = tk.Entry(root, show="*")
         self.password_entry.pack()
+
+        self.login_button = tk.Button(root, text="로그인", command=self.login)
+        self.login_button.pack()
+
+    def login(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+
+        if check_user_credentials(username, password):
+            self.open_attendance_interface(username)
+        else:
+            messagebox.showerror("오류", "사용자 인증 실패!")
+
+    def open_attendance_interface(self, username):
+        self.root.destroy()
+        attendance_root = tk.Tk()
+        app = UserAttendanceApp(attendance_root, username)
+        attendance_root.mainloop()
+
+class UserAttendanceApp:
+    def __init__(self, root, username):
+        self.root = root
+        self.root.title("출퇴근 기록")
+
+        self.username = username  # 사용자명 저장
 
         self.clock_in_button = tk.Button(root, text="출근", command=self.clock_in)
         self.clock_in_button.pack()
@@ -39,9 +58,9 @@ class UserAttendanceApp:
         self.record("퇴근")
 
     def record(self, status):
-        username = self.username_entry.get()
+        username = self.username
 
-        if username and self.password_entry.get():
+        if username:
             record_attendance(username, status)
             messagebox.showinfo("성공", f"{status} 기록되었습니다.")
         else:
@@ -49,5 +68,5 @@ class UserAttendanceApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = UserAttendanceApp(root)
+    app = UserAuthenticationApp(root)
     root.mainloop()
