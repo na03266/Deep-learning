@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from db_handler import check_user_credentials
 
 class UserAuthenticationApp:
     def __init__(self, root):
@@ -25,7 +26,7 @@ class UserAuthenticationApp:
         username = self.username_entry.get()
         password = self.password_entry.get()
 
-        if username == "admin" and password == "password":
+        if check_user_credentials(username, password):
             messagebox.showinfo("성공", "로그인 성공!")
         else:
             messagebox.showerror("오류", "사용자명 또는 비밀번호가 잘못되었습니다.")
