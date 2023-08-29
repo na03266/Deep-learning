@@ -20,3 +20,22 @@ def get_attendance_records(username):
 
     conn.close()
     return records
+def create_attendance_table():
+    conn = sqlite3.connect("attendance_database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS attendance (
+            id INTEGER PRIMARY KEY,
+            username TEXT,
+            status TEXT,
+            timestamp TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+def record_attendance(username, status):
+    create_attendance_table()  # 테이블이 없으면 생성
+    # 나머지 record_attendance 함수 내용은 그대로 유지

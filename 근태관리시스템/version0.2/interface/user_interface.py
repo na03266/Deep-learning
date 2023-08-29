@@ -1,7 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
-from attendance.attendance_record import record_attendance
+import os
+import sys
 
+# 현재 파일의 디렉토리를 기준으로 상대경로로 설정
+current_dir = os.path.dirname(os.path.abspath(__file__))
+attendance_dir = os.path.join(current_dir, "attendance")
+sys.path.append(attendance_dir)
+
+from attendance.attendance_record import record_attendance
 class UserAttendanceApp:
     def __init__(self, root):
         self.root = root
