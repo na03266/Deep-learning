@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from save_to_database import save_to_database  # save_to_database 모듈 임포트
 
 class UserRegistrationApp:
     def __init__(self, root):
@@ -25,7 +26,9 @@ class UserRegistrationApp:
         username = self.username_entry.get()
         password = self.password_entry.get()
 
-        # 여기서 데이터베이스에 사용자 정보를 저장하는 로직을 추가할 수 있습니다.
+        user_info = {"username": username, "password": password}
+        save_to_database(user_info)
+
         messagebox.showinfo("성공", "회원 등록이 완료되었습니다.")
 
 if __name__ == "__main__":
