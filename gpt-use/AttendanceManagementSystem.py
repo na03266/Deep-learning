@@ -92,6 +92,46 @@ class AttendanceManagementSystem:
         else:
             messagebox.showerror("Error", "Please enter User ID")
 
+    def register_user(self):
+        register_window = tk.Toplevel(self.root)
+        register_window.title("Register User")
+
+        label_id = tk.Label(register_window, text="Enter New User ID:")
+        label_id.pack()
+
+        new_user_id_entry = tk.Entry(register_window)
+        new_user_id_entry.pack()
+
+        label_password = tk.Label(register_window, text="Enter Password:")
+        label_password.pack()
+
+        new_password_entry = tk.Entry(register_window, show="*")
+        new_password_entry.pack()
+
+        label_role = tk.Label(register_window, text="Select Role:")
+        label_role.pack()
+
+        roles = ["admin", "employee"]
+        role_var = tk.StringVar()
+        role_var.set(roles[0])  # Default role
+
+        role_dropdown = tk.OptionMenu(register_window, role_var, *roles)
+        role_dropdown.pack()
+
+        register_button = tk.Button(register_window, text="Register", command=lambda: self.register_user_action(new_user_id_entry.get(), new_password_entry.get(), role_var.get(), register_window))
+        register_button.pack()
+
+    def register_user_action(self, user_id, password, role, register_window):
+        if user_id and password:
+            if user_id not in self.user_data:
+                self.user_data[user_id] = {"password": password, "role": role}
+                messagebox.showinfo("Success", "User registered successfully")
+                register_window.destroy()
+            else:
+                messagebox.showerror("Error", "User ID already exists")
+        else:
+            messagebox.showerror("Error", "Please enter User ID and password")
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = AttendanceManagementSystem(root)
