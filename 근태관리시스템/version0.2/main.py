@@ -11,7 +11,7 @@ class MainApp:
         self.root.title("메인 메뉴")
 
         self.authentication_controller = AuthenticationController()
-        self.attendance_controller = AttendanceController("database/attendance.db")
+        self.attendance_controller = AttendanceController("version0.2/database/attendance.db")
 
         self.user_interface = UserInterface(self.root, self.authentication_controller)
         self.user_interface.login_button.config(command=self.login)
