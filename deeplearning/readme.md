@@ -21,7 +21,13 @@
 ---
 - 가장 훌륭한 예측선
   - 
-  - [최소 제곱법](/deeplearning/least_squares_approximation.py)
-  - [평균 제곱 오차 & 평균 절대 오차](/deeplearning/mean_square_error.py)
-  - [선형 회귀](/deeplearning/LinearRegression.py)
-  - [다중 선형 회귀](/deeplearning/MultipleLinearRegression.py)
+  - [최소 제곱법](/deeplearning/최소제곱법/)
+  - [평균 제곱 오차 & 평균 절대 오차](/deeplearning/평균제곱오차/)
+  - [선형 회귀](/deeplearning/선형회기/)
+  - [다중 선형 회귀](/deeplearning/다중선형회기/)
+  - [텐서플로 이용](/deeplearning/tensorflow/)
+  - [로지스틱 회기 모델](/deeplearning/로지스틱회기모델/)
+---
+- 
+  - 
+  - 
