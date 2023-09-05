@@ -28,6 +28,6 @@
   - [텐서플로 이용](/deeplearning/tensorflow/)
   - [로지스틱 회기 모델](/deeplearning/로지스틱회기모델/)
 ---
-- 
-  - 
+- 신경망
+  - 다층 퍼셉트론
   - 

@@ -5,6 +5,8 @@ from model.attendance_model import AttendanceRecord
 class AttendanceController:
     def __init__(self, db_path):
         self.db_path = db_path
+        # 데이터베이스 연결을 생성하고 파일이 없으면 자동으로 생성됩니다.
+        self.conn = sqlite3.connect(self.db_path)
         self.create_table()  # 테이블을 생성하도록 호출
 
     def create_table(self):
@@ -51,3 +53,6 @@ class AttendanceController:
             records.append(record)
 
         return records
+
+db_path = "version0.2/database/attendance.db"
+attendance_controller = AttendanceController(db_path)
